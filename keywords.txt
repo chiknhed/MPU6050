@@ -1,0 +1,23 @@
+#######################################
+# Syntax Coloring Map For Bridge
+#######################################
+
+#######################################
+# Class (KEYWORD1)
+#######################################
+
+Mpu6050	KEYWORD1	MPU6050 Library
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# methods names in commond
+begin	KEYWORD2
+ReadRegisters	KEYWORD2
+GetGyroX	KEYWORD2
+GetGyroY	KEYWORD2
+GetGyroZ	KEYWORD2
+GetAccelX	KEYWORD2
+GetAccelY	KEYWORD2
+GetAccelZ	KEYWORD2
