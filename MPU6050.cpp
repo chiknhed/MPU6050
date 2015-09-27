@@ -1,5 +1,3 @@
-#include <Wire.h>
-
 #include <MPU6050.h>
 
 #define MPU6050_AUX_VDDIO          0x01   // R/W
@@ -581,7 +579,7 @@ Mpu6050Class::Mpu6050Class()
 	// Empty
 }
 
-Mpu6050Class::begin()
+void Mpu6050Class::begin()
 {
 	uint8_t c;
 	
@@ -699,3 +697,5 @@ int Mpu6050Class::MPU6050_write_reg(int reg, uint8_t data)
 
   return (error);
 }
+
+Mpu6050Class mpu6050;

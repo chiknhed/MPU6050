@@ -6,7 +6,7 @@
 # Class (KEYWORD1)
 #######################################
 
-Mpu6050	KEYWORD1	MPU6050 Library
+mpu6050	KEYWORD1	MPU6050 Library
 
 #######################################
 # Methods and Functions (KEYWORD2)

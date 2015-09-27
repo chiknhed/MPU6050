@@ -1,7 +1,7 @@
 #ifndef _MPU6050_H
 #define _MPU6050_H
 
-#include <Arduino.h>
+#include <Wire.h>
 
 // Declaring an union for the registers and the axis values.
 // The byte order does not match the byte order of 
@@ -12,7 +12,7 @@
 // lower address, so that has to be corrected.
 // The register part "reg" is only used internally, 
 // and are swapped in code.
-typedef union accel_t_gyro_union
+union accel_t_gyro_union
 {
   struct
   {
@@ -62,6 +62,6 @@ class Mpu6050Class {
 		accel_t_gyro_union accel_t_gyro;
 };
 
-extern Mpu6050Class &mpu6050;
+extern Mpu6050Class mpu6050;
 
 #endif
