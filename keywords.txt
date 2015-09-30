@@ -15,6 +15,7 @@ mpu6050	KEYWORD1	MPU6050 Library
 # methods names in commond
 begin	KEYWORD2
 ReadRegisters	KEYWORD2
+ReadAvrRegisters KEYWORD2
 GetGyroX	KEYWORD2
 GetGyroY	KEYWORD2
 GetGyroZ	KEYWORD2

@@ -595,9 +595,36 @@ void Mpu6050Class::begin()
 	MPU6050_write_reg(MPU6050_PWR_MGMT_1, 0);
 }
 
+void Mpu6050Class::ReadAvrRegisters(int count)
+{
+	int i;
+	
+	m_avrCount = count;
+	
+	m_totalGyroX = 0;
+	m_totalGyroY = 0;
+	m_totalGyroZ = 0;
+	m_totalAccelX = 0;
+	m_totalAccelY = 0;
+	m_totalAccelZ = 0;
+	
+	for (i = 0; i < count; i++) {
+		ReadRegisters();
+		
+		m_totalGyroX += (float) GetGyroX();
+		m_totalGyroY += (float) GetGyroY();
+		m_totalGyroZ += (float) GetGyroZ();
+		m_totalAccelX += (float) GetAccelX();
+		m_totalAccelY += (float) GetAccelY();
+		m_totalAccelZ += (float) GetAccelZ();
+	}
+}
+
 void Mpu6050Class::ReadRegisters(void)
 {
 	int error;
+	
+	m_avrCount = 0;
 	
 	error = MPU6050_read (MPU6050_ACCEL_XOUT_H, (uint8_t *) &accel_t_gyro, sizeof(accel_t_gyro));
 	
@@ -615,32 +642,50 @@ void Mpu6050Class::ReadRegisters(void)
 
 int Mpu6050Class::GetGyroX(void)
 {
-	return accel_t_gyro.value.x_gyro;
+	if (m_avrCount == 0)
+		return accel_t_gyro.value.x_gyro;
+	
+	return (int) (m_totalGyroX / (float)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetGyroY(void)
 {
-	return accel_t_gyro.value.y_gyro;
+	if (m_avrCount == 0)
+		return accel_t_gyro.value.y_gyro;
+	
+	return (int) (m_totalGyroY / (float)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetGyroZ(void)
 {
-	return accel_t_gyro.value.z_gyro;
+	if (m_avrCount == 0)
+		return accel_t_gyro.value.z_gyro;
+	
+	return (int) (m_totalGyroZ / (float)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetAccelX(void)
 {
-	return accel_t_gyro.value.x_accel;
+	if (m_avrCount == 0)
+		return accel_t_gyro.value.x_accel;
+	
+	return (int) (m_totalAccelX / (float)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetAccelY(void)
 {
-	return accel_t_gyro.value.y_accel;
+	if (m_avrCount == 0)
+		return accel_t_gyro.value.y_accel;
+	
+	return (int) (m_totalAccelY / (float)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetAccelZ(void)
 {
-	return accel_t_gyro.value.z_accel;
+	if (m_avrCount == 0)
+		return accel_t_gyro.value.z_accel;
+	
+	return (int) (m_totalAccelZ / (float)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::MPU6050_read(int start, uint8_t *buffer, int size)
