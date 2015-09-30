@@ -8,7 +8,10 @@ void setup() {
 }
 
 void loop() {
+  unsigned long start_time, finish_time;
+  
   while (1) {
+    start_time = millis();
     mpu6050.ReadAvrRegisters(10);
     
     Serial.print(F("GetGyroX"));
@@ -28,6 +31,11 @@ void loop() {
 
     Serial.print(F("\nGetAccelZ"));
     Serial.print(mpu6050.GetAccelZ(), DEC);
+    Serial.println("");
+    
+    finish_time = millis();
+
+    Serial.println(finish_time - start_time);
 
     Serial.print(F("\n\n"));
 
