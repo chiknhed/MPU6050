@@ -62,12 +62,12 @@ class Mpu6050Class {
 		int MPU6050_write_reg(int reg, uint8_t data);
 		accel_t_gyro_union accel_t_gyro;
 		unsigned char m_avrCount;
-		float m_totalGyroX;
-		float m_totalGyroY;
-		float m_totalGyroZ;
-		float m_totalAccelX;
-		float m_totalAccelY;
-		float m_totalAccelZ;
+		double m_totalGyroX;
+		double m_totalGyroY;
+		double m_totalGyroZ;
+		double m_totalAccelX;
+		double m_totalAccelY;
+		double m_totalAccelZ;
 };
 
 extern Mpu6050Class mpu6050;
