@@ -611,12 +611,12 @@ void Mpu6050Class::ReadAvrRegisters(int count)
 	for (i = 0; i < count; i++) {
 		ReadRegisters();
 		
-		m_totalGyroX += (float) GetGyroX();
-		m_totalGyroY += (float) GetGyroY();
-		m_totalGyroZ += (float) GetGyroZ();
-		m_totalAccelX += (float) GetAccelX();
-		m_totalAccelY += (float) GetAccelY();
-		m_totalAccelZ += (float) GetAccelZ();
+		m_totalGyroX += (double) accel_t_gyro.value.x_gyro;
+		m_totalGyroY += (double) accel_t_gyro.value.y_gyro;
+		m_totalGyroZ += (double) accel_t_gyro.value.z_gyro;
+		m_totalAccelX += (double) accel_t_gyro.value.x_accel;
+		m_totalAccelY += (double) accel_t_gyro.value.y_accel;
+		m_totalAccelZ += (double) accel_t_gyro.value.z_accel;
 	}
 }
 
@@ -645,7 +645,7 @@ int Mpu6050Class::GetGyroX(void)
 	if (m_avrCount == 0)
 		return accel_t_gyro.value.x_gyro;
 	
-	return (int) (m_totalGyroX / (float)m_avrCount + 0.5);
+	return (int) (m_totalGyroX / (double)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetGyroY(void)
@@ -653,7 +653,7 @@ int Mpu6050Class::GetGyroY(void)
 	if (m_avrCount == 0)
 		return accel_t_gyro.value.y_gyro;
 	
-	return (int) (m_totalGyroY / (float)m_avrCount + 0.5);
+	return (int) (m_totalGyroY / (double)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetGyroZ(void)
@@ -661,7 +661,7 @@ int Mpu6050Class::GetGyroZ(void)
 	if (m_avrCount == 0)
 		return accel_t_gyro.value.z_gyro;
 	
-	return (int) (m_totalGyroZ / (float)m_avrCount + 0.5);
+	return (int) (m_totalGyroZ / (double)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetAccelX(void)
@@ -669,15 +669,16 @@ int Mpu6050Class::GetAccelX(void)
 	if (m_avrCount == 0)
 		return accel_t_gyro.value.x_accel;
 	
-	return (int) (m_totalAccelX / (float)m_avrCount + 0.5);
+	return (int) (m_totalAccelX / (double)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetAccelY(void)
 {
+
 	if (m_avrCount == 0)
 		return accel_t_gyro.value.y_accel;
 	
-	return (int) (m_totalAccelY / (float)m_avrCount + 0.5);
+	return (int) (m_totalAccelY / (double)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::GetAccelZ(void)
@@ -685,7 +686,7 @@ int Mpu6050Class::GetAccelZ(void)
 	if (m_avrCount == 0)
 		return accel_t_gyro.value.z_accel;
 	
-	return (int) (m_totalAccelZ / (float)m_avrCount + 0.5);
+	return (int) (m_totalAccelZ / (double)m_avrCount + 0.5);
 }
 
 int Mpu6050Class::MPU6050_read(int start, uint8_t *buffer, int size)
